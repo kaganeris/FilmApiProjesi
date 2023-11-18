@@ -10,4 +10,11 @@
     <ProjectReference Include="..\Proje.DAL\Proje.DAL.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="AutoMapper\" />
+    <Folder Include="Models\DTOs\" />
+    <Folder Include="Models\VMs\" />
+    <Folder Include="Validations\" />
+  </ItemGroup>
+
 </Project>

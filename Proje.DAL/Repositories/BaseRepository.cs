@@ -36,10 +36,15 @@ namespace Proje.DAL.Repositories
         public bool Delete(int id)
         {
             var entity = GetByID(id);
-            entity.AktifMi = false;
-            entity.SilinmeTarihi = DateTime.Now;
-            context.Set<T>().Update(entity);
-            return Save() > 0;
+            if (entity != null)
+            {
+                entity.AktifMi = false;
+                entity.SilinmeTarihi = DateTime.Now;
+                context.Set<T>().Update(entity);
+                return Save() > 0;
+            }
+            else
+                return false;   
         }
 
         public List<T> GetAll() => context.Set<T>().ToList();
