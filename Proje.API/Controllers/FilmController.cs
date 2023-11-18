@@ -13,11 +13,15 @@ namespace Proje.API.Controllers
     public class FilmController : ControllerBase
     {
         private readonly IFilmService filmService;
+        private readonly IOyuncuService oyuncuService;
+        private readonly IKategoriService kategoriService;
         private readonly IMapper mapper;
 
-        public FilmController(IFilmService filmService, IMapper mapper)
+        public FilmController(IFilmService filmService, IOyuncuService oyuncuService, IKategoriService kategoriService, IMapper mapper)
         {
             this.filmService = filmService;
+            this.oyuncuService = oyuncuService;
+            this.kategoriService = kategoriService;
             this.mapper = mapper;
         }
         [HttpGet]
@@ -47,12 +51,38 @@ namespace Proje.API.Controllers
                 Film film = new Film();
                 film = mapper.Map<Film>(filmDTO);
 
+
+                foreach (var item in filmDTO.OyuncuIDleri)
+                {
+                    var oyuncu = oyuncuService.GetByID(item);
+                    if (oyuncu == null)
+                        return BadRequest("Girdiğiniz OyuncuID'si ile oyuncu bulunamadı!");
+                    else
+                    {
+                        film.FilmlerOyuncular.Add(new FilmlerOyuncular { Film = film, Oyuncu = oyuncu });
+                    }
+                }
+
+                foreach (var item in filmDTO.KategoriIDleri)
+                {
+                    var kategori = kategoriService.GetByID(item);
+                    if (kategori == null)
+                        return BadRequest("Girdiğiniz KategoriID'si ile kategori bulunamadı!");
+                    else
+                    {
+                        film.FilmlerKategoriler.Add(new FilmlerKategoriler { Film = film, Kategori = kategori });
+                    }
+                }
+
                 bool serviceResult = filmService.Add(film);
 
                 if (serviceResult == true)
-                    return Ok("Film başarıyla eklendi");
+                    return Ok("Film başarıyla eklendi!");
                 else
-                    return BadRequest("Film eklenemedi! \nNot:Ad ve dil 30 harften fazla olamaz.");
+                    return BadRequest("HATA! Film eklenemedi! \nNOT: Ad 30 harftan fazla olamaz!");
+
+
+
             }
             else
             {
@@ -66,7 +96,7 @@ namespace Proje.API.Controllers
         }
 
         [HttpPut("{id}")]
-        public IActionResult Update(int id,FilmDTO filmDTO)
+        public IActionResult Update(int id, FilmDTO filmDTO)
         {
             var updatedFilm = filmService.GetByID(id);
             if (updatedFilm == null)
@@ -76,7 +106,7 @@ namespace Proje.API.Controllers
 
                 CreateFilmValidations validationRules = new CreateFilmValidations();
                 var result = validationRules.Validate(filmDTO);
-                if(result.IsValid)
+                if (result.IsValid)
                 {
                     updatedFilm = mapper.Map(filmDTO, updatedFilm);
 

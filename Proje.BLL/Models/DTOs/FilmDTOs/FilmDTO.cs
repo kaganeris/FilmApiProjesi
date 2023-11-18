@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Proje.CORE.Entities;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -11,5 +12,7 @@ namespace Proje.BLL.Models.DTOs.FilmDTOs
         public string Ad { get; set; }
         public string Dil { get; set; }
         public double Sure { get; set; }
+        public List<int> OyuncuIDleri { get; set; }
+        public List<int> KategoriIDleri { get; set; }
     }
 }
