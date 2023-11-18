@@ -11,11 +11,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Models\DTOs\KategoriDTOs\" />
-    <Folder Include="Models\DTOs\OyuncuDTOs\" />
     <Folder Include="Models\VMs\" />
-    <Folder Include="Validations\KategoriValidations\" />
-    <Folder Include="Validations\OyuncuValidations\" />
   </ItemGroup>
 
   <ItemGroup>
