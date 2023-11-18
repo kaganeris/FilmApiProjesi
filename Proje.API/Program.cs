@@ -1,4 +1,5 @@
 using Microsoft.EntityFrameworkCore;
+using Proje.BLL.AutoMapper;
 using Proje.BLL.Services.Abstract;
 using Proje.BLL.Services.Concrete;
 using Proje.CORE.Repositories;
@@ -17,13 +18,15 @@ namespace Proje.API
 
             builder.Services.AddDbContext<AppDbContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultCon")));
 
+            builder.Services.AddAutoMapper(typeof(MappingProfile));
+
             // Repository dependency injection
             builder.Services.AddTransient(typeof(IBaseRepository<>), typeof(BaseRepository<>));
             builder.Services.AddTransient(typeof(IOyuncuRepository), typeof(OyuncuRepository));
             builder.Services.AddTransient(typeof(IFilmRepository), typeof(FilmRepository));
             builder.Services.AddTransient(typeof(IKategoriRepository), typeof(KategoriRepository));
 
-            // Service dependency intection
+            //Service dependency intection
             builder.Services.AddTransient(typeof(IBaseService<>), typeof(BaseService<>));
             builder.Services.AddTransient(typeof(IKategoriService), typeof(KategoriService));
             builder.Services.AddTransient(typeof(IOyuncuService), typeof(OyuncuService));

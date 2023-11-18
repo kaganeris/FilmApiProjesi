@@ -1,4 +1,5 @@
 ﻿using Proje.CORE.Entities;
+using Proje.CORE.Repositories;
 using Proje.DAL.Context;
 using System;
 using System.Collections.Generic;
@@ -8,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Proje.DAL.Repositories
 {
-    public class OyuncuRepository : BaseRepository<Oyuncu>
+    public class OyuncuRepository : BaseRepository<Oyuncu>,IOyuncuRepository
     {
         private readonly AppDbContext context;
 

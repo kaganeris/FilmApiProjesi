@@ -23,14 +23,14 @@ namespace Proje.DAL.Repositories
             entity.OlusturmaTarihi = DateTime.Now;
             entity.AktifMi = true;
             context.Set<T>().Add(entity);
-            return Save() > 0;
+            return Save() > 0 ? true : false;
         }
         public bool Update(T entity)
         {
             entity.GuncellemeTarihi = DateTime.Now;
             entity.AktifMi = true;
             context.Set<T>().Update(entity);
-            return Save() > 0;
+            return Save() > 0 ? true: false;
         }
 
         public bool Delete(int id)
@@ -41,7 +41,7 @@ namespace Proje.DAL.Repositories
                 entity.AktifMi = false;
                 entity.SilinmeTarihi = DateTime.Now;
                 context.Set<T>().Update(entity);
-                return Save() > 0;
+                return Save() > 0 ? true : false;
             }
             else
                 return false;   
@@ -56,7 +56,17 @@ namespace Proje.DAL.Repositories
 
         public List<T> GetWhereAll(Expression<Func<T, bool>> exp) => context.Set<T>().Where(exp).ToList();
 
-        public int Save() => context.SaveChanges();
+        public int Save()
+        {
+            try
+            {
+                return context.SaveChanges();
+            }
+            catch (Exception)
+            {
+                return 0;
+            }
+        }
 
         
     }
