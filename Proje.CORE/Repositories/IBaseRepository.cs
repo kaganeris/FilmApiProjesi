@@ -12,11 +12,11 @@ namespace Proje.CORE.Repositories
     {
         T GetByID(int id);
         List<T> GetAll();
-        T GetWhere(Expression<Func<bool,T>> exp);
-        List<T> GetWhereAll(Expression<Func<bool,T>> exp);
+        T GetWhere(Expression<Func<T,bool>> exp);
+        List<T> GetWhereAll(Expression<Func<T, bool>> exp);
         bool Add(T entity);
         bool Update(T entity);
         bool Delete(int id);
-        void Save();
+        int Save();
     }
 }
