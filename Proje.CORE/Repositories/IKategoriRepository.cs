@@ -10,5 +10,8 @@ namespace Proje.CORE.Repositories
     public interface IKategoriRepository : IBaseRepository<Kategori>
     {
         // İsteklere göre doldurulabilir.
+
+        Kategori GetKategoriIncludeFilmById(int id);
+        List<Kategori> GetAllIncludeFilmler();
     }
 }

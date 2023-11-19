@@ -17,6 +17,8 @@ namespace Proje.API.Controllers
         private readonly IKategoriService kategoriService;
         private readonly IMapper mapper;
 
+        // TODO: Filmler listesinin oyuncu ve kategorileriyle gelmesi.
+
         public FilmController(IFilmService filmService, IOyuncuService oyuncuService, IKategoriService kategoriService, IMapper mapper)
         {
             this.filmService = filmService;
@@ -29,16 +31,6 @@ namespace Proje.API.Controllers
         {
             var filmler = filmService.GetAll();
             return Ok(filmler);
-        }
-
-        [HttpGet("{id}")]
-        public IActionResult Get(int id)
-        {
-            var film = filmService.GetByID(id);
-            if (film == null)
-                return NotFound();
-            else
-                return Ok(film);
         }
 
         [HttpPost]
@@ -143,6 +135,34 @@ namespace Proje.API.Controllers
                     return Ok("Film başarıyla silindi!");
                 else return BadRequest("HATA! Film silinemedi!");
             }
+        }
+
+        [HttpGet("{id}")]
+        public IActionResult Get(int id)
+        {
+            var film = filmService.GetByID(id);
+            if (film == null)
+                return NotFound();
+            else
+                return Ok(film);
+        }
+
+        [HttpGet]
+        [Route("[action]")]
+        public IActionResult GetAllInclude()
+        {
+            var filmler = filmService.GetAllIncludeOyuncularKategoriler();
+            return Ok(filmler);
+        }
+
+        [HttpGet("[action]/{id}")]
+        public IActionResult GetInclude(int id)
+        {
+            var film = filmService.GetFilmIncludeOyuncularKategorilerById(id);
+            if (film == null)
+                return NotFound();
+            else
+                return Ok(film);
         }
     }
 }

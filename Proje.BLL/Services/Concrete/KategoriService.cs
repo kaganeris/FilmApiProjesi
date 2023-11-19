@@ -18,6 +18,17 @@ namespace Proje.BLL.Services.Concrete
             this.kategoriRepository = kategoriRepository;
         }
 
-        // İsteklere göre ekleme yapılabilir.
+        public List<Kategori> GetAllKategoriIncludeFilmler()
+        {
+            return kategoriRepository.GetAllIncludeFilmler();
+        }
+
+        public Kategori GetKategoriIncludeFilmlerById(int id)
+        {
+            if (id <= 0)
+                return null;
+            else
+                return kategoriRepository.GetKategoriIncludeFilmById(id);
+        }
     }
 }

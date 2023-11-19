@@ -32,16 +32,6 @@ namespace Proje.API.Controllers
             return Ok(kategoriler);
         }
 
-        [HttpGet("{id}")]
-        public IActionResult Get(int id)
-        {
-            var kategori = kategoriService.GetByID(id);
-            if (kategori == null)
-                return NotFound();
-            else
-                return Ok(kategori);
-        }
-
         [HttpPost]
         public IActionResult Create(KategoriDTO kategoriDTO)
         {
@@ -118,6 +108,34 @@ namespace Proje.API.Controllers
                     return Ok("Kategori başarıyla silindi!");
                 else return BadRequest("HATA! Kategori silinemedi!");
             }
+        }
+
+        [HttpGet("{id}")]
+        public IActionResult Get(int id)
+        {
+            var kategori = kategoriService.GetByID(id);
+            if (kategori == null)
+                return NotFound();
+            else
+                return Ok(kategori);
+        }
+
+        [HttpGet]
+        [Route("[action]")]
+        public IActionResult GetAllInclude()
+        {
+            var kategoriler = kategoriService.GetAllKategoriIncludeFilmler();
+            return Ok(kategoriler);
+        }
+
+        [HttpGet("[action]/{id}")]
+        public IActionResult GetInclude(int id)
+        {
+            var kategori = kategoriService.GetKategoriIncludeFilmlerById(id);
+            if (kategori == null)
+                return NotFound();
+            else
+                return Ok(kategori);
         }
     }
 }

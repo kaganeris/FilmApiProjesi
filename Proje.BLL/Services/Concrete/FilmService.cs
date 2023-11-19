@@ -18,6 +18,17 @@ namespace Proje.BLL.Services.Concrete
             this.filmRepository = filmRepository;
         }
 
-        // İsteklere göre ekleme yapılabilir.
+        public List<Film> GetAllIncludeOyuncularKategoriler()
+        {
+            return filmRepository.GetAllIncludeOyuncuKategori();
+        }
+
+        public Film GetFilmIncludeOyuncularKategorilerById(int id)
+        {
+            if (id <= 0)
+                return null;
+            else
+                return filmRepository.GetFilmIncludeOyuncularKategorilerById(id);
+        }
     }
 }

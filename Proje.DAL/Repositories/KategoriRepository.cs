@@ -1,4 +1,5 @@
-﻿using Proje.CORE.Entities;
+﻿using Microsoft.EntityFrameworkCore;
+using Proje.CORE.Entities;
 using Proje.CORE.Repositories;
 using Proje.DAL.Context;
 using System;
@@ -18,6 +19,14 @@ namespace Proje.DAL.Repositories
             this.context = context;
         }
 
-        // İsteklere göre doldurulabilir.
+        public List<Kategori> GetAllIncludeFilmler()
+        {
+            return context.Kategoriler.Include(x => x.FilmlerKategoriler).ToList();
+        }
+
+        public Kategori GetKategoriIncludeFilmById(int id)
+        {
+            return context.Kategoriler.Include(x => x.FilmlerKategoriler).Where(x => x.ID == id).FirstOrDefault();
+        }
     }
 }

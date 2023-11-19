@@ -10,5 +10,7 @@ namespace Proje.CORE.Repositories
     public interface IOyuncuRepository : IBaseRepository<Oyuncu>
     {
         // İsteklere göre doldurulabilir.
+        Oyuncu GetOyuncuIncludeFilmById(int id);
+        List<Oyuncu> GetAllIncludeFilmler();
     }
 }

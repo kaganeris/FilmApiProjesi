@@ -10,5 +10,8 @@ namespace Proje.CORE.Repositories
     public interface IFilmRepository : IBaseRepository<Film>
     {
         // İsteklere göre doldurulabilir.
+
+        Film GetFilmIncludeOyuncularKategorilerById(int id);
+        List<Film> GetAllIncludeOyuncuKategori();
     }
 }

@@ -9,6 +9,8 @@ namespace Proje.BLL.Services.Abstract
 {
     public interface IFilmService : IBaseService<Film>
     {
-        // İsteklere göre ekleme yapılabilir.
+
+        List<Film> GetAllIncludeOyuncularKategoriler();
+        Film GetFilmIncludeOyuncularKategorilerById(int id);
     }
 }

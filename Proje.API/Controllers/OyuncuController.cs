@@ -32,16 +32,6 @@ namespace Proje.API.Controllers
             return Ok(oyuncular);
         }
 
-        [HttpGet("{id}")]
-        public IActionResult Get(int id)
-        {
-            var oyuncu = oyuncuService.GetByID(id);
-            if (oyuncu == null)
-                return NotFound();
-            else
-                return Ok(oyuncu);
-        }
-
         [HttpPost]
         public IActionResult Create(OyuncuDTO oyuncuDTO)
         {
@@ -118,6 +108,34 @@ namespace Proje.API.Controllers
                     return Ok("Oyuncu başarıyla silindi!");
                 else return BadRequest("HATA! Oyuncu silinemedi!");
             }
+        }
+
+        [HttpGet("{id}")]
+        public IActionResult Get(int id)
+        {
+            var oyuncu = oyuncuService.GetByID(id);
+            if (oyuncu == null)
+                return NotFound();
+            else
+                return Ok(oyuncu);
+        }
+
+        [HttpGet]
+        [Route("[action]")]
+        public IActionResult GetAllInclude()
+        {
+            var oyuncular = oyuncuService.GetAllIncludeFilmler();
+            return Ok(oyuncular);
+        }
+
+        [HttpGet("[action]/{id}")]
+        public IActionResult GetInclude(int id)
+        {
+            var oyuncu = oyuncuService.GetOyuncuIncludeFilmlerById(id);
+            if (oyuncu == null)
+                return NotFound();
+            else
+                return Ok(oyuncu);
         }
     }
 }

@@ -5,6 +5,7 @@ using Proje.BLL.Services.Concrete;
 using Proje.CORE.Repositories;
 using Proje.DAL.Context;
 using Proje.DAL.Repositories;
+using System.Text.Json.Serialization;
 
 namespace Proje.API
 {
@@ -32,7 +33,8 @@ namespace Proje.API
             builder.Services.AddTransient(typeof(IOyuncuService), typeof(OyuncuService));
             builder.Services.AddTransient(typeof(IFilmService), typeof(FilmService));
 
-            builder.Services.AddControllers();
+            builder.Services.AddControllers().AddJsonOptions(options => options.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles);
+
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();

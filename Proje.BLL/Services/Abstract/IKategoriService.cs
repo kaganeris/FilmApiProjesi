@@ -9,6 +9,7 @@ namespace Proje.BLL.Services.Abstract
 {
     public interface IKategoriService : IBaseService<Kategori>
     {
-        // İsteklere göre ekleme yapılabilir.
+        Kategori GetKategoriIncludeFilmlerById(int id);
+        List<Kategori> GetAllKategoriIncludeFilmler();
     }
 }

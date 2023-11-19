@@ -9,6 +9,7 @@ namespace Proje.BLL.Services.Abstract
 {
     public interface IOyuncuService : IBaseService<Oyuncu>
     {
-        // İsteklere göre ekleme yapılabilir.
+        List<Oyuncu> GetAllIncludeFilmler();
+        Oyuncu GetOyuncuIncludeFilmlerById(int id);
     }
 }
