@@ -18,7 +18,7 @@ namespace Proje.BLL.Services.Concrete
             this.filmRepository = filmRepository;
         }
 
-        public List<Film> GetAllIncludeOyuncularKategoriler()
+        public object GetAllIncludeOyuncularKategoriler()
         {
             return filmRepository.GetAllIncludeOyuncuKategori();
         }

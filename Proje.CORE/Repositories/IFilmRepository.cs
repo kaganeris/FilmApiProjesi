@@ -12,6 +12,6 @@ namespace Proje.CORE.Repositories
         // İsteklere göre doldurulabilir.
 
         Film GetFilmIncludeOyuncularKategorilerById(int id);
-        List<Film> GetAllIncludeOyuncuKategori();
+        object GetAllIncludeOyuncuKategori();
     }
 }

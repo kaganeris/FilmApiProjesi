@@ -10,7 +10,7 @@ namespace Proje.BLL.Services.Abstract
     public interface IFilmService : IBaseService<Film>
     {
 
-        List<Film> GetAllIncludeOyuncularKategoriler();
+        object GetAllIncludeOyuncularKategoriler();
         Film GetFilmIncludeOyuncularKategorilerById(int id);
     }
 }
